@@ -6,7 +6,8 @@ import { addToCart } from "@/store/cart/CartSlice";
 import { memo, useEffect, useState } from "react";
 import Like from "@/assets/svg/like.svg?react";
 import LikeFill from "@/assets/svg/like-fill.svg?react";
-import { actLikeToggle } from "@/store/wishlist/wishlishSlice";
+import { actLikeToggle } from "@/store/wishlist/wishlistSlice";
+
 
 const { product, productImg, maximumNotice, wishlistBtn } = styles;
 

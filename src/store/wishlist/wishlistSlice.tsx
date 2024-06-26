@@ -1,16 +1,23 @@
 import { IWishlistState } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import actLikeToggle from "./act/actLikeToggle";
+import actGetWishlistItems from "./act/actGetWishlistItems";
 
 const initialState: IWishlistState = {
   itemsIds: [],
-  error: null
+  productsInfo: [],
+  error: null,
+  loading: "idle",
 };
 
 const wishlistSlice = createSlice({
   name: "wishlist",
   initialState,
-  reducers: {},
+  reducers: {
+    wishlistCleanUp: (state) => {
+      state.productsInfo = [];
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(actLikeToggle.pending, (state) => {
       state.error = null;
@@ -21,6 +28,7 @@ const wishlistSlice = createSlice({
         state.itemsIds.push(action.payload.id)
       } else {
         state.itemsIds = state.itemsIds.filter(id => id !== action.payload.id)
+        state.productsInfo = state.productsInfo.filter(product => product.id !== action.payload.id)
       }
     });
 
@@ -29,9 +37,27 @@ const wishlistSlice = createSlice({
         state.error = action.payload
       }
     });
+    // Get wishlist items
+    builder.addCase(actGetWishlistItems.pending, (state) => {
+      state.loading = 'pending';
+      state.error = null;
+    });
+
+    builder.addCase(actGetWishlistItems.fulfilled, (state, action) => {
+      state.loading = 'succeeded';
+      state.productsInfo = action.payload;
+    });
+
+    builder.addCase(actGetWishlistItems.rejected, (state, action) => {
+      state.loading = 'failed';
+      if (action.payload && typeof action.payload === 'string') {
+        state.error = action.payload
+      }
+    });
   }
 });
 
-export { actLikeToggle };
+export const { wishlistCleanUp } = wishlistSlice.actions
+export { actLikeToggle, actGetWishlistItems };
 
 export default wishlistSlice.reducer;

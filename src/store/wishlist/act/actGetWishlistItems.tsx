@@ -15,7 +15,7 @@ const actGetWishlistItems = createAsyncThunk(
         return fulfillWithValue([])
     }
     
-    const formattedIds = userWishlist.data.map((el) => `id=${el.productId}`)
+    const formattedIds = userWishlist.data.map((el) => `id=${el.productId}`).join("&")
 
 
     try {
