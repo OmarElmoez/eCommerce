@@ -1,0 +1,42 @@
+.container {
+  position: relative;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.quantity {
+  background-color: #0dcaf0;
+  height: 22px;
+  width: 22px;
+  border-radius: 50%;
+  position: absolute;
+  top: -16px;
+  right: -5px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+@keyframes pumping {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1.2);
+  }
+  40% {
+    transform: scale(1.4);
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.pumping {
+  animation: pumping 300ms ease-in-out;
+}
