@@ -1,7 +1,8 @@
+import axios from "axios";
 import { RootState } from "@/store";
 import { TProductsResponse } from "@/types";
+import { axiosErrorHandler } from "@/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 const actGetProductsWithItems = createAsyncThunk(
   "cart/getProductsWithItems",
@@ -26,11 +27,7 @@ const actGetProductsWithItems = createAsyncThunk(
       return response.data;
 
     } catch (error) {
-      if (axios.isAxiosError(error)) {
-        return rejectWithValue(error.message || error.response?.data.message);
-      } else {
-        return rejectWithValue("An unexpected error occurred");
-      }
+      return rejectWithValue(axiosErrorHandler(error));
     }
   }
 );
