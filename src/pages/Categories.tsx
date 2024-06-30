@@ -1,7 +1,10 @@
 import { GridList } from "@/components/common";
 import { Category } from "@/components/eCommerce";
 import { Loading } from "@/components/feedback";
-import { actGetCategories } from "@/store/categories/categoriesSlice";
+import {
+  actGetCategories,
+  categoriesCleanUp,
+} from "@/store/categories/categoriesSlice";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 
 import { useEffect } from "react";
@@ -14,15 +17,20 @@ const Categories = () => {
   );
 
   useEffect(() => {
-    if (!records.length) {
-      dispatch(actGetCategories());
-    }
-  }, [dispatch, records]);
+    dispatch(actGetCategories());
+
+    return () => {
+      dispatch(categoriesCleanUp());
+    };
+  }, [dispatch]);
 
   return (
     <Container>
       <Loading status={loading} error={error}>
-        <GridList records={records} renderItems={(record) => <Category {...record} />} />
+        <GridList
+          records={records}
+          renderItems={(record) => <Category {...record} />}
+        />
       </Loading>
     </Container>
   );
