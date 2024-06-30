@@ -6,11 +6,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const actGetProducts = createAsyncThunk(
   "products/getProducts",
   async (prefix: string, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+    const { rejectWithValue, signal } = thunkAPI;
 
     try {
       const response = await axios.get<TProductsResponse>(
-        `/products/?cat_prefix=${prefix}`
+        `/products/?cat_prefix=${prefix}`, { signal }
       );
       return response.data;
     } catch (error) {

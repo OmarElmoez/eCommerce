@@ -7,7 +7,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 const actGetProductsWithItems = createAsyncThunk(
   "cart/getProductsWithItems",
   async (_, thunkAPI) => {
-    const { rejectWithValue, getState, fulfillWithValue } = thunkAPI;
+    const { rejectWithValue, getState, fulfillWithValue, signal } = thunkAPI;
     const { cart } = getState() as RootState;
 
     const relattedIds = Object.keys(cart.items);
@@ -22,7 +22,7 @@ const actGetProductsWithItems = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get<TProductsResponse>(`/products?${formattedIds}`);
+      const response = await axios.get<TProductsResponse>(`/products?${formattedIds}`, { signal });
 
       return response.data;
 

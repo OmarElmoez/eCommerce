@@ -8,7 +8,7 @@ type TResponse = IProduct[];
 const actGetWishlistItems = createAsyncThunk(
   "wishlist/getWishlistItems",
   async (_, thunkAPI) => {
-    const { rejectWithValue, fulfillWithValue } = thunkAPI;
+    const { rejectWithValue, fulfillWithValue, signal } = thunkAPI;
 
     const userWishlist = await axios.get<IWishlistItem[]>(`/wishlist?userId=1`);
 
@@ -21,7 +21,9 @@ const actGetWishlistItems = createAsyncThunk(
       .join("&");
 
     try {
-      const response = await axios.get<TResponse>(`/products?${formattedIds}`);
+      const response = await axios.get<TResponse>(`/products?${formattedIds}`, {
+        signal,
+      });
       return response.data;
     } catch (error) {
       return rejectWithValue(axiosErrorHandler(error));

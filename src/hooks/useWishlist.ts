@@ -13,10 +13,12 @@ const useWishlist = () => {
   );
   
   useEffect(() => {
-    dispatch(actGetWishlistItems());
+    const promise = dispatch(actGetWishlistItems());
 
     return () => {
       dispatch(wishlistCleanUp());
+
+      promise.abort();
     };
   }, [dispatch]);
 

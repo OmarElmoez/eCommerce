@@ -12,10 +12,12 @@ const useCategories = () => {
   );
 
   useEffect(() => {
-    dispatch(actGetCategories());
+    const promise = dispatch(actGetCategories());
 
     return () => {
       dispatch(categoriesCleanUp());
+
+      promise.abort();
     };
   }, [dispatch]);
 
