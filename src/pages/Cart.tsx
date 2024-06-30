@@ -1,46 +1,15 @@
 import { CartItemList, CartSubtotalPrice } from "@/components/eCommerce";
 import { Loading } from "@/components/feedback";
-import {
-  actGetProductsWithItems,
-  cartCleanUp,
-  removeFromCart,
-  updateQuantity,
-} from "@/store/cart/CartSlice";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { useCallback, useEffect } from "react";
-
+import { useCart } from "@/hooks";
 const Cart = () => {
-  const dispatch = useAppDispatch();
-  const { loading, error, productsInfo, items } = useAppSelector(
-    (state) => state.cart
-  );
-
-  useEffect(() => {
-    dispatch(actGetProductsWithItems());
-
-    return () => {
-      dispatch(cartCleanUp());
-    }
-  }, [dispatch]);
-
-  const productsWithQuantity = productsInfo.map((product) => {
-    return { ...product, quantity: items[product.id] };
-  });
-
-  const changeQuantityHandler = useCallback(
-    (id: number, quantity: number) => {
-      dispatch(updateQuantity({ id, quantity }));
-    },
-    [dispatch]
-  );
-
-  const removeItemHandler = useCallback(
-    (id: number) => {
-      dispatch(removeFromCart(id));
-    },
-    [dispatch]
-  );
-
+  const {
+    loading,
+    error,
+    productsInfo,
+    productsWithQuantity,
+    changeQuantityHandler,
+    removeItemHandler,
+  } = useCart();
   return (
     <Loading status={loading} error={error}>
       {productsInfo.length > 0 ? (
@@ -52,7 +21,9 @@ const Cart = () => {
           />
           <CartSubtotalPrice products={productsWithQuantity} />
         </>
-      ) : "Cart is empty"}
+      ) : (
+        "Cart is empty"
+      )}
     </Loading>
   );
 };
