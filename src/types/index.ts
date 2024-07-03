@@ -12,6 +12,7 @@ import TCartItemListProps from "./cart/CartItemListProps.types";
 import ICartItemProps from "./cart/CartItemProps.types";
 import IWishlistState from "./wishlist/WishlistState.types";
 import IWishlistItem from "./wishlist/WishlistItem.types";
+import { isString } from "./guards";
 
 export type {
   TResponse,
@@ -27,5 +28,7 @@ export type {
   TCartItemListProps,
   ICartItemProps,
   IWishlistState,
-  IWishlistItem
+  IWishlistItem,
 };
+
+export { isString };

@@ -1,4 +1,4 @@
-import { IProductsState } from "@/types";
+import { IProductsState, isString } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProducts from "./act/actGetProducts";
 
@@ -24,7 +24,7 @@ const productsSlice = createSlice({
 
     builder.addCase(actGetProducts.rejected, (state, action) => {
       state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
+      if (isString(action.payload)) {
         state.error = action.payload
       }
     })

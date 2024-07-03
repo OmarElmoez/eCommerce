@@ -1,4 +1,4 @@
-import { ICartState } from "@/types";
+import { ICartState, isString } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetProductsWithItems from "./act/actGetProductsWithItems";
 
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
       }),
       builder.addCase(actGetProductsWithItems.rejected, (state, action) => {
         state.loading = "failed";
-        if (action.payload && typeof action.payload === "string") {
+        if (isString(action.payload)) {
           state.error = action.payload;
         }
       });

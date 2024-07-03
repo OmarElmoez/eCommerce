@@ -1,4 +1,4 @@
-import { ICategoriesState } from "@/types";
+import { ICategoriesState, isString } from "@/types";
 import { createSlice } from "@reduxjs/toolkit";
 import actGetCategories from "./act/actGetCategories";
 
@@ -29,7 +29,7 @@ const categoriesSlice = createSlice({
 
     builder.addCase(actGetCategories.rejected, (state, action) => {
       state.loading = "failed";
-      if (action.payload && typeof action.payload === "string") {
+      if (isString(action.payload)) {
         state.error = action.payload
       }
     })
