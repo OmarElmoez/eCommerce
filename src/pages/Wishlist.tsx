@@ -6,7 +6,7 @@ import { useWishlist } from "@/hooks";
 const Wishlist = () => {
   const { records, loading, error } = useWishlist();
   return (
-    <Loading status={loading} error={error}>
+    <Loading status={loading} error={error} type="product">
       <GridList
         records={records}
         renderItems={(record) => <Product {...record} />}

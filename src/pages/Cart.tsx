@@ -11,7 +11,7 @@ const Cart = () => {
     removeItemHandler,
   } = useCart();
   return (
-    <Loading status={loading} error={error}>
+    <Loading status={loading} error={error} type="cart">
       {productsInfo.length > 0 ? (
         <>
           <CartItemList

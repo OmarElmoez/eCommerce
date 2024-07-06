@@ -1,8 +1,19 @@
 import { LoadingProps } from "@/types";
+import { CartSkeleton, CategorySkeleton, ProductSkeleton } from "../skeletons";
 
-const Loading = ({ status, error, children }: LoadingProps) => {
+const skeletons = {
+  category: CategorySkeleton,
+  cart: CartSkeleton,
+  product: ProductSkeleton
+}
+
+const Loading = ({ status, error, children, type }: LoadingProps) => {
+
+  const Skeleton = skeletons[type]
+  
   if (status === "pending") {
-    return <p>Loading...</p>;
+    return <Skeleton />
+
   }
 
 
