@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { MainLayout } from "@/layouts/MainLayout/MainLayout";
 import ProductsLoader from "@/loaders/Products";
-const Error = lazy(() => import("@/pages/Error"));
+import { Error } from "@/pages";
 const Home = lazy(() => import("@/pages/Home"));
 const AboutUs = lazy(() => import("@/pages/AboutUs"));
 const Cart = lazy(() => import("@/pages/Cart"));
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     errorElement: <Error />,
-    children: [
+    children: [ 
       {
         index: true,
         element: (

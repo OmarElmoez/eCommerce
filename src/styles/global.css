@@ -5,8 +5,11 @@ img {
 
 /* Cusotm Styles */
 .notFound {
-  padding-top: 15%;
-  text-align: center;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .notFound h1 {
