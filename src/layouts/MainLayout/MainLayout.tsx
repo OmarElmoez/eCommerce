@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 
 
 const { container, wrapper } = styles;
-export const MainLayout = () => {
+const MainLayout = () => {
   return (
     <Container className={container}>
       <Header />
@@ -16,3 +16,5 @@ export const MainLayout = () => {
     </Container>
   )
 }
+
+export default MainLayout
