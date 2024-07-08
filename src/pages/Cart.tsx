@@ -1,6 +1,7 @@
 import { CartItemList, CartSubtotalPrice } from "@/components/eCommerce";
-import { Loading } from "@/components/feedback";
+import { Loading, LottieHandler } from "@/components/feedback";
 import { useCart } from "@/hooks";
+import { Col, Row } from "react-bootstrap";
 const Cart = () => {
   const {
     loading,
@@ -22,7 +23,11 @@ const Cart = () => {
           <CartSubtotalPrice products={productsWithQuantity} />
         </>
       ) : (
-        "Cart is empty"
+        <Row>
+          <Col>
+            <LottieHandler type="empty" msg="Your cart is empty" />
+          </Col>
+        </Row>
       )}
     </Loading>
   );

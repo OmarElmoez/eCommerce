@@ -10,6 +10,7 @@ const Products = () => {
     <Container>
       <Loading status={loading} error={error} type="product">
         <GridList
+          emptyMsg="No products found"
           records={recordsWithQuantity}
           renderItems={(record) => <Product {...record} />}
         />

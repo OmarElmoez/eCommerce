@@ -1,5 +1,6 @@
 import { LoadingProps } from "@/types";
 import { CartSkeleton, CategorySkeleton, ProductSkeleton } from "../skeletons";
+import LottieHandler from "../lottieHandler/LottieHandler";
 
 const skeletons = {
   category: CategorySkeleton,
@@ -23,7 +24,7 @@ const Loading = ({
 
   // also can be if (status === "failed")
   if (error) {
-    return <p>Error: {error}</p>;
+    return <LottieHandler type="error" msg={error} />;
   }
 
   return <>{children}</>;

@@ -1,3 +1,4 @@
+import { LottieHandler } from "@/components/feedback";
 import { TGridListProps } from "@/types";
 import { HasId } from "@/types/gridList/gridList.types";
 
@@ -6,6 +7,7 @@ import { Col, Row } from "react-bootstrap";
 const GridList = <T extends HasId>({
   records,
   renderItems,
+  emptyMsg
 }: TGridListProps<T>) => {
   const listItems =
     records.length > 0
@@ -19,7 +21,7 @@ const GridList = <T extends HasId>({
             {renderItems(record)}
           </Col>
         ))
-      : "No products found";
+      : <LottieHandler type="empty" msg={emptyMsg} />;
 
   return <Row>{listItems}</Row>;
 };
