@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
-import { TFormInputs, signUpSchema } from "@/types";
+import { TSignUp, registerSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/forms";
 const Register = () => {
@@ -8,12 +8,12 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<TFormInputs>({
+  } = useForm<TSignUp>({
     mode: "onBlur",
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit: SubmitHandler<TFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<TSignUp> = (data) => {
     console.log(data);
   };
 
@@ -34,7 +34,7 @@ const Register = () => {
       />
 
       <Input
-        label="Email address"
+        label="Email Address"
         name="email"
         register={register}
         error={errors.email?.message as string}

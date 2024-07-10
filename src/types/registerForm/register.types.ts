@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const signUpSchema = z.object({
+export const registerSchema = z.object({
   firstName: z.string().trim().min(1, { message: "First name is required" }),
   lastName: z.string().trim().min(1, { message: "Last name is required" }),
   email: z
@@ -18,6 +18,6 @@ export const signUpSchema = z.object({
   path: ["confirmPassword"],
 });
 
-type TFormInputs = z.infer<typeof signUpSchema>;
+type TSignUp = z.infer<typeof registerSchema>;
 
-export default TFormInputs;
+export default TSignUp;

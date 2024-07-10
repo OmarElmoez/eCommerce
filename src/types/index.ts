@@ -13,8 +13,10 @@ import ICartItemProps from "./cart/CartItemProps.types";
 import IWishlistState from "./wishlist/WishlistState.types";
 import IWishlistItem from "./wishlist/WishlistItem.types";
 import { isString } from "./guards";
-import TFormInputs from "./registerForm/FormInputs.types";
-import { signUpSchema } from "./registerForm/FormInputs.types";
+import TSignUp from "./registerForm/register.types";
+import TLogin from "./loginForm/login.types";
+import { registerSchema } from "./registerForm/register.types";
+import { loginSchema } from "./loginForm/login.types";
 import TInput from "./input/Input.types";
 
 export type {
@@ -32,8 +34,9 @@ export type {
   ICartItemProps,
   IWishlistState,
   IWishlistItem,
-  TFormInputs,
+  TSignUp,
+  TLogin,
   TInput,
 };
 
-export { isString, signUpSchema };
+export { isString, registerSchema, loginSchema };
