@@ -15,6 +15,7 @@ import IWishlistItem from "./wishlist/WishlistItem.types";
 import { isString } from "./guards";
 import TFormInputs from "./registerForm/FormInputs.types";
 import { signUpSchema } from "./registerForm/FormInputs.types";
+import TInput from "./input/Input.types";
 
 export type {
   TResponse,
@@ -32,6 +33,7 @@ export type {
   IWishlistState,
   IWishlistItem,
   TFormInputs,
+  TInput,
 };
 
 export { isString, signUpSchema };
