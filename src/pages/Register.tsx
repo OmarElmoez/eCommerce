@@ -62,12 +62,13 @@ const Register = () => {
             ? errors.email?.message
             : emailStatus === "notAvailable"
             ? "Email already in use"
-            : ""
+            : emailStatus === "failed" ? "Failed to check availability" : ""
         }
         checkingText={
           emailStatus === "checking" ? "Checking Availability..." : ""
         }
         availableText={emailStatus === "available" ? "Available for use" : ""}
+        disabled={emailStatus === "checking"}
       />
 
       <Input
@@ -84,7 +85,7 @@ const Register = () => {
         error={errors.confirmPassword?.message as string}
       />
 
-      <Button variant="info" type="submit" style={{ color: "#fff" }}>
+      <Button variant="info" type="submit" style={{ color: "#fff" }} disabled={emailStatus === "checking"}>
         Submit
       </Button>
     </Form>

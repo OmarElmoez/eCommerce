@@ -9,7 +9,8 @@ const Input = <T extends FieldValues> ({
   error,
   onblur,
   checkingText,
-  availableText
+  availableText,
+  disabled
 }: TInput<T>) => {
   const onblurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (onblur) {
@@ -28,6 +29,7 @@ const Input = <T extends FieldValues> ({
         onBlur={onblurHandler}
         isInvalid={!!error}
         isValid={!!availableText}
+        disabled={disabled}
       />
       <Form.Control.Feedback type="invalid">
         {error}

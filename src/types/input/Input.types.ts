@@ -8,7 +8,8 @@ type TInput<T extends FieldValues> = {
   error: string;
   onblur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   checkingText?: string;
-  availableText?: string
+  availableText?: string;
+  disabled?: boolean
 };
 
 export default TInput
