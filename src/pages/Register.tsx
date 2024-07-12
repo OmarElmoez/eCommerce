@@ -16,7 +16,7 @@ const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const { checkEmailAvailability, emailStatus, enteredEmail } =
+  const { checkEmailAvailability, emailStatus, enteredEmail, resetEmail } =
     useCheckEmailAvailability();
 
   const onSubmit: SubmitHandler<TSignUp> = (data) => {
@@ -28,8 +28,11 @@ const Register = () => {
     const value = e.target.value;
     const { isDirty, invalid } = getFieldState("email");
     if (isDirty && !invalid && enteredEmail !== value) {
-      // start checking ...
       checkEmailAvailability(value)
+    }
+
+    if (isDirty && invalid && enteredEmail) {
+      resetEmail();
     }
   };
 

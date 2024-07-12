@@ -25,10 +25,16 @@ const useCheckEmailAvailability = () => {
 
   }
 
+  const resetEmail = () => {
+    setEnteredEmail(null);
+    setEmailStatus("idle");
+  }
+
   return {
     emailStatus,
     enteredEmail,
-    checkEmailAvailability
+    checkEmailAvailability,
+    resetEmail
   }
 };
 
