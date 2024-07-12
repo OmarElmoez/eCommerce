@@ -74,6 +74,7 @@ const Register = () => {
       <Input
         label="Password"
         name="password"
+        type="password"
         register={register}
         error={errors.password?.message as string}
       />
@@ -81,6 +82,7 @@ const Register = () => {
       <Input
         label="Confirm Password"
         name="confirmPassword"
+        type="password"
         register={register}
         error={errors.confirmPassword?.message as string}
       />
