@@ -21,6 +21,7 @@ const Register = () => {
 
   const emailOnblurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
     await trigger("email");
+    const value = e.target.value;
     const { isDirty, invalid } = getFieldState("email");
     if (isDirty && !invalid) {
       // start checking ...
