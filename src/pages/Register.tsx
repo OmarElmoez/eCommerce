@@ -17,6 +17,10 @@ const Register = () => {
     console.log(data);
   };
 
+  const emailOnblurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
+    console.log(e);
+  }
+
   return (
     <Form className="w-50 mx-auto" onSubmit={handleSubmit(onSubmit)}>
       <Input
@@ -37,6 +41,7 @@ const Register = () => {
         label="Email Address"
         name="email"
         register={register}
+        onBlur={emailOnblurHandler}
         error={errors.email?.message as string}
       />
 
