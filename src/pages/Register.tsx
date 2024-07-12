@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 import { TSignUp, registerSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useCheckEmailAvailability } from "@/hooks";
 import { Input } from "@/components/forms";
 const Register = () => {
   const {
@@ -15,6 +16,9 @@ const Register = () => {
     resolver: zodResolver(registerSchema),
   });
 
+  const { checkEmailAvailability, emailStatus, enteredEmail } =
+    useCheckEmailAvailability();
+
   const onSubmit: SubmitHandler<TSignUp> = (data) => {
     console.log(data);
   };
@@ -23,11 +27,11 @@ const Register = () => {
     await trigger("email");
     const value = e.target.value;
     const { isDirty, invalid } = getFieldState("email");
-    if (isDirty && !invalid) {
+    if (isDirty && !invalid && enteredEmail !== value) {
       // start checking ...
+      checkEmailAvailability(value)
     }
-    
-  }
+  };
 
   return (
     <Form className="w-50 mx-auto" onSubmit={handleSubmit(onSubmit)}>
