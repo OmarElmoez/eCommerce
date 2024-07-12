@@ -8,6 +8,8 @@ const Input = <T extends FieldValues> ({
   register,
   error,
   onblur,
+  checkingText,
+  availableText
 }: TInput<T>) => {
   const onblurHandler = (e: React.FocusEvent<HTMLInputElement>) => {
     if (onblur) {
@@ -25,10 +27,15 @@ const Input = <T extends FieldValues> ({
         {...register(name)}
         onBlur={onblurHandler}
         isInvalid={!!error}
+        isValid={!!availableText}
       />
       <Form.Control.Feedback type="invalid">
         {error}
       </Form.Control.Feedback>
+      <Form.Control.Feedback type="valid">
+        {availableText}
+      </Form.Control.Feedback>
+      {checkingText && <Form.Text muted>{checkingText}</Form.Text>}
     </Form.Group>
   );
 };

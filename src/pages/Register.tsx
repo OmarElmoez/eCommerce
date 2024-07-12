@@ -28,7 +28,7 @@ const Register = () => {
     const value = e.target.value;
     const { isDirty, invalid } = getFieldState("email");
     if (isDirty && !invalid && enteredEmail !== value) {
-      checkEmailAvailability(value)
+      checkEmailAvailability(value);
     }
 
     if (isDirty && invalid && enteredEmail) {
@@ -57,7 +57,17 @@ const Register = () => {
         name="email"
         register={register}
         onblur={emailOnblurHandler}
-        error={errors.email?.message as string}
+        error={
+          errors.email?.message
+            ? errors.email?.message
+            : emailStatus === "notAvailable"
+            ? "Email already in use"
+            : ""
+        }
+        checkingText={
+          emailStatus === "checking" ? "Checking Availability..." : ""
+        }
+        availableText={emailStatus === "available" ? "Available for use" : ""}
       />
 
       <Input

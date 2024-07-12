@@ -6,7 +6,9 @@ type TInput<T extends FieldValues> = {
   type?: string;
   register: UseFormRegister<T>;
   error: string;
-  onblur?: (e: React.FocusEvent<HTMLInputElement>) => void
+  onblur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  checkingText?: string;
+  availableText?: string
 };
 
 export default TInput
