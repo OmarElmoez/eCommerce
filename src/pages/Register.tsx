@@ -41,7 +41,7 @@ const Register = () => {
         label="Email Address"
         name="email"
         register={register}
-        onBlur={emailOnblurHandler}
+        onblur={emailOnblurHandler}
         error={errors.email?.message as string}
       />
 
