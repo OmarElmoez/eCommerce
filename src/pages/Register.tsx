@@ -1,10 +1,20 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Spinner } from "react-bootstrap";
 import { TSignUp, registerSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCheckEmailAvailability } from "@/hooks";
 import { Input } from "@/components/forms";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { actAuthRegister } from "@/store/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
+
+  const dispatch = useAppDispatch();
+
+  const { loading, error } = useAppSelector(state => state.auth);
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -20,7 +30,8 @@ const Register = () => {
     useCheckEmailAvailability();
 
   const onSubmit: SubmitHandler<TSignUp> = (data) => {
-    console.log(data);
+    const { firstName, lastName, email, password } = data;
+    dispatch(actAuthRegister({ firstName, lastName, email, password })).unwrap().then(() => navigate('/login?registered=true'));
   };
 
   const emailOnblurHandler = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -87,9 +98,13 @@ const Register = () => {
         error={errors.confirmPassword?.message as string}
       />
 
-      <Button variant="info" type="submit" style={{ color: "#fff" }} disabled={emailStatus === "checking"}>
-        Submit
+      <Button variant="info" type="submit" style={{ color: "#fff" }} disabled={emailStatus === "checking" || loading === 'pending'}>
+        {loading === 'pending' ? <>
+          <Spinner animation="border" size="sm" /> Loading...
+        </> : 'Submit'}
       </Button>
+
+      {error && <p className="text-danger" style={{marginTop: '10px'}}>{error}</p>}
     </Form>
   );
 };
